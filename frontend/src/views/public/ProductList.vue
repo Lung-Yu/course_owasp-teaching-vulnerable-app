@@ -66,7 +66,8 @@
               <img :src="product.imageUrl || '/placeholder.jpg'" :alt="product.name" />
             </div>
             <div class="product-info">
-              <h3 class="product-name">{{ product.name }}</h3>
+              <!-- ⚠️ XSS 漏洞：使用 v-html 直接渲染未過濾的 HTML -->
+              <h3 class="product-name" v-html="product.name"></h3>
               <p class="product-category">{{ product.category }}</p>
               <div class="product-footer">
                 <span class="product-price">NT$ {{ product.price }}</span>

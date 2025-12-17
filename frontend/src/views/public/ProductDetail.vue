@@ -23,7 +23,8 @@
 
             <div class="product-desc">
               <h3>商品描述</h3>
-              <p>{{ product.description || '暫無描述' }}</p>
+              <!-- ⚠️ XSS 漏洞：使用 v-html 直接渲染未過濾的 HTML -->
+              <p v-html="product.description || '暫無描述'"></p>
             </div>
 
             <div class="product-stock">
