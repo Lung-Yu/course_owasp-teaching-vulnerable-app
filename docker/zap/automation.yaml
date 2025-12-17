@@ -1,0 +1,59 @@
+---
+env:
+  contexts:
+    - name: "Vulnerable Backend"
+      urls:
+        - "http://backend:8081"
+      includePaths:
+        - "http://backend:8081.*"
+      excludePaths: []
+      authentication:
+        method: "manual"
+      sessionManagement:
+        method: "cookie"
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: true
+
+jobs:
+  - type: spider
+    parameters:
+      context: "Vulnerable Backend"
+      maxDuration: 5
+      maxDepth: 5
+      maxChildren: 10
+
+  - type: spiderAjax
+    parameters:
+      context: "Vulnerable Backend"
+      maxDuration: 5
+      maxCrawlDepth: 5
+      numberOfBrowsers: 2
+
+  - type: passiveScan-wait
+    parameters:
+      maxDuration: 10
+
+  - type: activeScan
+    parameters:
+      context: "Vulnerable Backend"
+      maxRuleDurationInMins: 5
+      maxScanDurationInMins: 30
+
+  - type: report
+    parameters:
+      template: "traditional-html"
+      reportDir: "/zap/wrk"
+      reportFile: "zap-auto-report"
+    risks:
+      - high
+      - medium
+      - low
+      - info
+
+  - type: report
+    parameters:
+      template: "traditional-json"
+      reportDir: "/zap/wrk"
+      reportFile: "zap-auto-report"

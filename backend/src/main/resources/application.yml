@@ -1,0 +1,58 @@
+server:
+  port: 8081
+  error:
+    include-stacktrace: always
+    include-message: always
+    include-exception: true
+    include-binding-errors: always
+
+spring:
+  application:
+    name: vulnerable-app
+  
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:owasp_demo}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  
+  sql:
+    init:
+      mode: always
+
+jwt:
+  secret: weak-secret-key
+  expiration: 86400000
+
+app:
+  mode: vulnerable
+  mode-label: Vulnerable Mode
+  description: E-commerce application for security training
+
+logging:
+  level:
+    root: INFO
+    com.owasp.vulnerable: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    env:
+      show-values: always
+    configprops:
+      show-values: always

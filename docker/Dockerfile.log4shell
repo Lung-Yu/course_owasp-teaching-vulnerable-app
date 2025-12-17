@@ -1,0 +1,29 @@
+FROM openjdk:8u181-jdk-alpine AS build
+
+WORKDIR /app
+
+RUN apk add --no-cache maven
+
+COPY backend-log4shell/pom.xml pom.xml
+COPY backend-log4shell/src src
+
+RUN mvn clean package -DskipTests
+
+FROM openjdk:8u181-jre-alpine
+
+WORKDIR /app
+
+RUN echo "FLAG{log4j_cve_2021_44228}" > /flag.txt && \
+    chmod 444 /flag.txt
+
+RUN mkdir -p /app/logs
+
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8083
+
+ENV JAVA_OPTS="-Dcom.sun.jndi.ldap.object.trustURLCodebase=true \
+               -Dcom.sun.jndi.rmi.object.trustURLCodebase=true \
+               -Dlog4j2.formatMsgNoLookups=false"
+
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

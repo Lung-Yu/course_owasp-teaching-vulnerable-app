@@ -1,0 +1,23 @@
+FROM python:3.11-alpine
+
+RUN apk add --no-cache openjdk8 curl bash
+
+WORKDIR /app
+
+RUN curl -L -o /app/ysoserial-all.jar \
+    https://github.com/frohoff/ysoserial/releases/download/v0.0.6/ysoserial-all.jar
+
+COPY docker/attacker/requirements.txt requirements.txt
+COPY docker/attacker/server.py server.py
+COPY docker/attacker/Exploit.java Exploit.java
+COPY docker/attacker/entrypoint.sh entrypoint.sh
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN mkdir -p /var/log /app/payloads && touch /var/log/attacker.log
+
+RUN chmod +x entrypoint.sh
+
+EXPOSE 1389 8888 9999
+
+ENTRYPOINT ["/app/entrypoint.sh"]

@@ -1,0 +1,32 @@
+FROM eclipse-temurin:21-jdk-alpine AS build
+
+WORKDIR /app
+
+COPY common/pom.xml common/pom.xml
+COPY backend/pom.xml backend/pom.xml
+
+COPY common/src common/src
+COPY backend/src backend/src
+
+WORKDIR /app/common
+RUN apk add --no-cache maven && \
+    mvn clean install -DskipTests
+
+WORKDIR /app/backend
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:21-jre-alpine
+
+WORKDIR /app
+
+COPY --from=build /app/backend/target/*.jar app.jar
+
+RUN mkdir -p /app/uploads && \
+    echo "test file content" > /app/uploads/test.txt
+
+RUN echo "FLAG{path_traversal_success}" > /flag.txt && \
+    chmod 644 /flag.txt
+
+EXPOSE 8081
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

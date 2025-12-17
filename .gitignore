@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+target/
+
+# Build outputs
+dist/
+*.jar
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# Environment
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+
+# Keep .env for teaching purposes (normally should be ignored)
+# !.env

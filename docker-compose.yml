@@ -1,0 +1,193 @@
+# =====================================================
+# OWASP 教學環境 - Docker Compose
+# =====================================================
+# 使用方式：
+#   一鍵啟動: docker-compose up -d --build
+#   ZAP 掃描: docker-compose --profile scan up
+#   SonarQube: docker-compose --profile sonar up
+#
+# 服務說明：
+#   - 漏洞版本後端:     http://localhost:8081
+#   - Log4Shell 後端:  http://localhost:8083
+#   - 前端網站:        http://localhost
+#   - 資料庫:          localhost:5432
+#   - 攻擊者伺服器:    LDAP :1389, HTTP :8888, Callback :9999
+#   - 內部 API:        internal-api:8080 (SSRF 目標)
+#   - SonarQube:       http://localhost:9000 (需 --profile sonar)
+# =====================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vuln-demo-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: owasp_demo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d owasp_demo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    container_name: vuln-backend
+    restart: unless-stopped
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: owasp_demo
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  internal-api:
+    build:
+      context: ./docker/internal-api
+      dockerfile: Dockerfile
+    container_name: vuln-internal-api
+    restart: unless-stopped
+    expose:
+      - "8080"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/Dockerfile.frontend
+    container_name: vuln-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend-log4shell:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.log4shell
+    container_name: vuln-log4shell
+    restart: unless-stopped
+    ports:
+      - "8083:8083"
+    depends_on:
+      - attacker
+    networks:
+      - app-network
+
+  attacker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.attacker
+    container_name: vuln-attacker
+    restart: unless-stopped
+    environment:
+      HTTP_HOST: attacker
+      HTTP_PORT: 8888
+    ports:
+      - "1389:1389"
+      - "8888:8888"
+      - "9999:9999"
+    networks:
+      - app-network
+
+  # =====================================================
+  # OWASP ZAP 安全掃描器
+  # =====================================================
+
+  # ZAP 掃描後端 (基本模式)
+  zap-scan:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    container_name: vuln-zap-scan
+    profiles:
+      - scan
+    volumes:
+      - ./zap-reports:/zap/wrk:rw
+      - ./docker/zap:/zap/config:ro
+    networks:
+      - app-network
+    depends_on:
+      - backend
+      - frontend
+    command: >
+      zap-full-scan.py
+      -t http://backend:8081
+      -r report.html
+      -J report.json
+      -a
+      -j
+      -m 10
+      -d
+
+  # ZAP Automation Framework 掃描 (進階模式)
+  zap-auto:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    container_name: vuln-zap-auto
+    profiles:
+      - scan-auto
+    volumes:
+      - ./zap-reports:/zap/wrk:rw
+      - ./docker/zap:/zap/config:ro
+    networks:
+      - app-network
+    depends_on:
+      - backend
+      - frontend
+    command: >
+      zap.sh -cmd
+      -autorun /zap/config/automation.yaml
+
+  # =====================================================
+  # SonarQube 原始碼靜態分析
+  # =====================================================
+
+  sonarqube:
+    image: sonarqube:lts-community
+    container_name: vuln-sonarqube
+    profiles:
+      - sonar
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonarqube
+      SONAR_JDBC_USERNAME: postgres
+      SONAR_JDBC_PASSWORD: postgres
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:

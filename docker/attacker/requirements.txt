@@ -1,0 +1,2 @@
+twisted>=22.0.0
+ldaptor>=21.2.0
