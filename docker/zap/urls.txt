@@ -1,0 +1,144 @@
+# =====================================================
+# OWASP Demo - Vulnerable Backend API Endpoints
+# =====================================================
+# 這個檔案列出所有需要 ZAP 掃描的 API 端點
+# ZAP 會使用這個清單進行目標掃描
+# =====================================================
+
+# === 認證相關 (A01, A07) ===
+http://backend:8081/api/auth/login
+http://backend:8081/api/auth/register
+http://backend:8081/api/auth/forgot-password
+http://backend:8081/api/auth/reset-password
+http://backend:8081/api/auth/check-username
+http://backend:8081/api/auth/change-password
+
+# === 用戶管理 (A01 - IDOR) ===
+http://backend:8081/api/users
+http://backend:8081/api/users/1
+http://backend:8081/api/users/2
+http://backend:8081/api/users/1/sensitive
+http://backend:8081/api/users/export
+
+# === 管理員功能 (A01 - Broken Access Control) ===
+http://backend:8081/api/admin/users
+http://backend:8081/api/admin/users/1/role
+http://backend:8081/api/admin/config
+http://backend:8081/api/admin/export/users
+http://backend:8081/api/admin/stats
+
+# === 訂單管理 (A01 - IDOR) ===
+http://backend:8081/api/orders
+http://backend:8081/api/orders/1
+http://backend:8081/api/orders/number/ORD-001
+http://backend:8081/api/orders/checkout
+http://backend:8081/api/orders/1/status
+http://backend:8081/api/orders/1/refund
+
+# === 產品搜尋 (A03 - SQL Injection) ===
+http://backend:8081/api/products
+http://backend:8081/api/products/1
+http://backend:8081/api/products/search?keyword=test
+http://backend:8081/api/products/search?keyword='OR'1'='1
+
+# === 搜尋功能 (A03 - SQL Injection) ===
+http://backend:8081/api/search/products?q=test
+http://backend:8081/api/search/users?q=admin
+http://backend:8081/api/search/orders?q=1
+
+# === 系統命令 (A03 - Command Injection) ===
+http://backend:8081/api/system/ping?host=localhost
+http://backend:8081/api/system/lookup?domain=google.com
+http://backend:8081/api/system/info?type=os
+http://backend:8081/api/system/read-log?file=app.log
+
+# === 檔案操作 (A01 - Path Traversal) ===
+http://backend:8081/api/files/download?filename=test.txt
+http://backend:8081/api/files/read?path=config.txt
+http://backend:8081/api/files/list?dir=uploads
+
+# === 模板引擎 (A03 - Expression Injection) ===
+http://backend:8081/api/template/eval?expr=1+1
+http://backend:8081/api/template/render
+http://backend:8081/api/template/format
+http://backend:8081/api/template/property?name=test
+
+# === Webhook (A10 - SSRF) ===
+http://backend:8081/api/webhook/test
+http://backend:8081/api/webhook/fetch?url=http://example.com
+http://backend:8081/api/webhook/import
+http://backend:8081/api/webhook/check?url=http://localhost
+
+# === 加密功能 (A02 - Cryptographic Failures) ===
+http://backend:8081/api/crypto/encrypt
+http://backend:8081/api/crypto/decrypt
+http://backend:8081/api/crypto/hash
+http://backend:8081/api/crypto/generate-token
+http://backend:8081/api/crypto/token-history
+
+# === 優惠券 (A04 - Insecure Design) ===
+http://backend:8081/api/coupons/apply
+http://backend:8081/api/coupons/available
+http://backend:8081/api/coupons/generate
+
+# === 限時搶購 (A04 - Race Condition) ===
+http://backend:8081/api/flash-sale/active
+http://backend:8081/api/flash-sale/buy
+http://backend:8081/api/flash-sale/purchases/1
+
+# === 速率限制測試 (A04 - No Rate Limiting) ===
+http://backend:8081/api/rate-limit/sensitive-action
+http://backend:8081/api/rate-limit/password-reset
+http://backend:8081/api/rate-limit/verify-otp
+http://backend:8081/api/rate-limit/login-attempt
+
+# === 除錯端點 (A05 - Security Misconfiguration) ===
+http://backend:8081/api/debug/config
+http://backend:8081/api/debug/env
+http://backend:8081/api/debug/properties
+http://backend:8081/api/debug/health
+
+# === 錯誤處理 (A05 - Error Disclosure) ===
+http://backend:8081/api/error/null
+http://backend:8081/api/error/array
+http://backend:8081/api/error/parse
+http://backend:8081/api/error/sql
+http://backend:8081/api/error/sensitive
+
+# === XML 處理 (A05 - XXE) ===
+http://backend:8081/api/xml/parse
+http://backend:8081/api/xml/import-settings
+http://backend:8081/api/xml/examples
+
+# === 日誌記錄 (A09 - Logging Failures) ===
+http://backend:8081/api/logging/demo/login
+http://backend:8081/api/logging/demo/sensitive-action
+http://backend:8081/api/logging/demo/search
+http://backend:8081/api/logging/view/audit
+http://backend:8081/api/logging/view/file?name=app.log
+
+# === 資料完整性 (A08 - Data Integrity) ===
+http://backend:8081/api/integrity/deserialize
+http://backend:8081/api/integrity/deserialize/base64
+http://backend:8081/api/integrity/cart/checkout
+http://backend:8081/api/integrity/profile/1
+http://backend:8081/api/integrity/plugins/install
+http://backend:8081/api/integrity/plugins
+http://backend:8081/api/integrity/session/create
+http://backend:8081/api/integrity/session/validate
+
+# === Spring Actuator (A05 - Misconfiguration) ===
+http://backend:8081/actuator
+http://backend:8081/actuator/health
+http://backend:8081/actuator/info
+http://backend:8081/actuator/env
+http://backend:8081/actuator/beans
+http://backend:8081/actuator/mappings
+http://backend:8081/actuator/heapdump
+http://backend:8081/actuator/threaddump
+http://backend:8081/actuator/loggers
+http://backend:8081/actuator/metrics
+
+# === 狀態檢查 ===
+http://backend:8081/api/status
+http://backend:8081/api/status/health

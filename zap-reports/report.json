@@ -1,12 +1,12 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Wed, 17 Dec 2025 23:47:35",
-	"created": "2025-12-17T23:47:35.322724502Z",
+	"@generated": "Fri, 19 Dec 2025 06:23:43",
+	"created": "2025-12-19T06:23:43.033696970Z",
 	"site":[ 
 		{
-			"@name": "https://content-signature-2.cdn.mozilla.net",
-			"@host": "content-signature-2.cdn.mozilla.net",
+			"@name": "https://firefox-settings-attachments.cdn.mozilla.net",
+			"@host": "firefox-settings-attachments.cdn.mozilla.net",
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
@@ -21,8 +21,8 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "37",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
+							"id": "39",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
 							"nodeName": null,
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -38,37 +38,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Embedder-Policy</p>",
 					"cweid": "693",
 					"wascid": "14",
-					"sourceid": "17"
-				},
-				{
-					"pluginid": "10036",
-					"alertRef": "10036-2",
-					"alert": "Server Leaks Version Information via \"Server\" HTTP Response Header Field",
-					"name": "Server Leaks Version Information via \"Server\" HTTP Response Header Field",
-					"riskcode": "1",
-					"confidence": "3",
-					"riskdesc": "Low (High)",
-					"desc": "<p>The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to.</p>",
-					"instances":[ 
-						{
-							"id": "31",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
-							"nodeName": null,
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "AmazonS3",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"systemic": false,
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to suppress the \"Server\" header or provide generic details.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://httpd.apache.org/docs/current/mod/core.html#servertokens</p><p>https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff648552(v=pandp.10)</p><p>https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>",
-					"cweid": "497",
-					"wascid": "13",
-					"sourceid": "17"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10035",
@@ -81,8 +51,8 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "32",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
+							"id": "31",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
@@ -98,7 +68,67 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "17"
+					"sourceid": "13"
+				},
+				{
+					"pluginid": "10096",
+					"alertRef": "10096",
+					"alert": "Timestamp Disclosure - Unix",
+					"name": "Timestamp Disclosure - Unix",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
+					"instances":[ 
+						{
+							"id": "33",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1645609406",
+							"otherinfo": "1645609406, which evaluates to: 2022-02-23 09:43:26."
+						},
+						{
+							"id": "35",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1703946492",
+							"otherinfo": "1703946492, which evaluates to: 2023-12-30 14:28:12."
+						},
+						{
+							"id": "32",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1773959826",
+							"otherinfo": "1773959826, which evaluates to: 2026-03-19 22:37:06."
+						},
+						{
+							"id": "34",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1827377968",
+							"otherinfo": "1827377968, which evaluates to: 2027-11-28 04:59:28."
+						}
+					],
+					"count": "4",
+					"systemic": false,
+					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
+					"otherinfo": "<p>1645609406, which evaluates to: 2022-02-23 09:43:26.</p>",
+					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
+					"cweid": "497",
+					"wascid": "13",
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10021",
@@ -111,8 +141,8 @@
 					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
 					"instances":[ 
 						{
-							"id": "33",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
+							"id": "36",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
 							"nodeName": null,
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -128,7 +158,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "17"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10116",
@@ -141,8 +171,8 @@
 					"desc": "<p>The version of ZAP you are using to test your app is out of date and is no longer being updated.</p><p>The risk level is set based on how out of date your ZAP version is.</p>",
 					"instances":[ 
 						{
-							"id": "34",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
+							"id": "37",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
@@ -158,7 +188,7 @@
 					"reference": "<p>https://www.zaproxy.org/download/</p>",
 					"cweid": "1104",
 					"wascid": "45",
-					"sourceid": "17"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10094",
@@ -171,28 +201,28 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "35",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
+							"id": "40",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "6yt02iGPK8h8+9bkTvQhn3gJmG/7OXjI4gBMIRPkqkWw+9pWfrzXT1ahdwl1pMx7wN0kuEEtYlg=",
-							"otherinfo": "\uFFFD+t\uFFFD!\uFFFD+\uFFFD|\uFFFD\uFFFD\uFFFDN\uFFFD!\uFFFDx\t\uFFFDo\uFFFD9x\uFFFD\uFFFD\\x0000L!\\x0013\uFFFDE\uFFFD\uFFFD\uFFFDV~\uFFFD\uFFFDOV\uFFFDw\tu\uFFFD\uFFFD{\uFFFD\uFFFD$\uFFFDA-bX"
+							"evidence": "AHVrFxMRV7MNGBTeVyWzW-JX05m_XeBQFGYdD_NR_gJhzlt-oKuQfFgYWiz3HM9DruHdaJqYY-TXX5g",
+							"otherinfo": "\\x0000uk\\x0017\\x0013\\x0011W\uFFFD\r\\x0018\\x0014\uFFFDW%\uFFFD[\uFFFDW\u04D9\uFFFD]\uFFFDP\\x0014f\\x001d\\x000f\uFFFDQ\uFFFD\\x0002a\uFFFD[~\uFFFD\uFFFD\uFFFD|X\\x0018Z,\uFFFD\\x001c\uFFFDC\uFFFD\uFFFD\uFFFDh\uFFFD\uFFFDc\uFFFD\uFFFD_\uFFFD"
 						}
 					],
 					"count": "1",
 					"systemic": false,
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
-					"otherinfo": "<p>\uFFFD+t\uFFFD!\uFFFD+\uFFFD|\uFFFD\uFFFD\uFFFDN\uFFFD!\uFFFDx\t\uFFFDo\uFFFD9x\uFFFD\uFFFD\\x0000L!\\x0013\uFFFDE\uFFFD\uFFFD\uFFFDV~\uFFFD\uFFFDOV\uFFFDw\tu\uFFFD\uFFFD{\uFFFD\uFFFD$\uFFFDA-bX</p>",
+					"otherinfo": "<p>\\x0000uk\\x0017\\x0013\\x0011W\uFFFD\r\\x0018\\x0014\uFFFDW%\uFFFD[\uFFFDW\u04D9\uFFFD]\uFFFDP\\x0014f\\x001d\\x000f\uFFFDQ\uFFFD\\x0002a\uFFFD[~\uFFFD\uFFFD\uFFFD|X\\x0018Z,\uFFFD\\x001c\uFFFDC\uFFFD\uFFFD\uFFFDh\uFFFD\uFFFDc\uFFFD\uFFFD_\uFFFD</p>",
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "17"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10050",
-					"alertRef": "10050-2",
+					"alertRef": "10050-1",
 					"alert": "Retrieved from Cache",
 					"name": "Retrieved from Cache",
 					"riskcode": "0",
@@ -202,33 +232,23 @@
 					"instances":[ 
 						{
 							"id": "30",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 198",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "38",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
-							"nodeName": null,
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 199",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+							"evidence": "HIT",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "1",
 					"systemic": false,
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
-					"otherinfo": "<p>The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use.</p>",
+					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.rfc-editor.org/rfc/rfc9110.html</p>",
 					"cweid": "525",
 					"wascid": "-1",
-					"sourceid": "17"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10049",
@@ -241,8 +261,8 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "36",
-							"uri": "https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2026-01-27-09-17-39.chain",
+							"id": "38",
+							"uri": "https://firefox-settings-attachments.cdn.mozilla.net/bundles/startup.json.mozlz4",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
@@ -258,7 +278,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "17"
+					"sourceid": "13"
 				}
 			]
 		},
@@ -279,32 +299,32 @@
 					"desc": "<p>This CORS misconfiguration could allow an attacker to perform AJAX queries to the vulnerable website from a malicious page loaded by the victim's user agent.</p><p>In order to perform authenticated AJAX queries, the server must specify the header \"Access-Control-Allow-Credentials: true\" and the \"Access-Control-Allow-Origin\" header must be set to null or the malicious page's domain. Even if this misconfiguration doesn't allow authenticated AJAX requests, unauthenticated sensitive content can still be accessed (e.g intranet websites).</p><p>A malicious page can belong to a malicious website but also a trusted website with flaws (e.g XSS, support of HTTP without TLS allowing code injection through MITM, etc).</p>",
 					"instances":[ 
 						{
-							"id": "108",
+							"id": "102",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
-							"attack": "origin: http://LHXDnmui.com",
+							"attack": "origin: http://LMrAjG2C.com",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "110",
+							"id": "104",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
-							"attack": "origin: http://LHXDnmui.com",
+							"attack": "origin: http://LMrAjG2C.com",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "107",
+							"id": "105",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
-							"attack": "origin: http://LHXDnmui.com",
+							"attack": "origin: http://LMrAjG2C.com",
 							"evidence": "",
 							"otherinfo": ""
 						},
@@ -314,17 +334,17 @@
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
-							"attack": "origin: http://LHXDnmui.com",
+							"attack": "origin: http://LMrAjG2C.com",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "109",
+							"id": "103",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
 							"param": "",
-							"attack": "origin: http://LHXDnmui.com",
+							"attack": "origin: http://LMrAjG2C.com",
 							"evidence": "",
 							"otherinfo": ""
 						}
@@ -336,7 +356,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS</p><p>https://portswigger.net/web-security/cors</p>",
 					"cweid": "942",
 					"wascid": "14",
-					"sourceid": "341"
+					"sourceid": "353"
 				},
 				{
 					"pluginid": "10038",
@@ -379,7 +399,7 @@
 					"desc": "<p>Spring Actuator for Health is enabled and may reveal sensitive information about this application. Spring Actuators can be used for real monitoring purposes, but should be used with caution as to not expose too much information about the application or the infrastructure running it.</p>",
 					"instances":[ 
 						{
-							"id": "45",
+							"id": "41",
 							"uri": "http://backend:8081/actuator/health",
 							"nodeName": null,
 							"method": "GET",
@@ -396,7 +416,7 @@
 					"reference": "<p>https://docs.spring.io/spring-boot/api/rest/actuator/index.html#overview</p>",
 					"cweid": "215",
 					"wascid": "13",
-					"sourceid": "97"
+					"sourceid": "115"
 				},
 				{
 					"pluginid": "10063",
@@ -469,7 +489,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "24",
+							"id": "7",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -479,7 +499,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "5",
+							"id": "1",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
@@ -499,7 +519,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "10",
+							"id": "8",
 							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
@@ -509,7 +529,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "22",
+							"id": "9",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -526,7 +546,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -539,7 +559,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "19",
+							"id": "18",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -549,7 +569,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "3",
+							"id": "4",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
@@ -559,7 +579,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "8",
+							"id": "23",
 							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
@@ -569,7 +589,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "13",
+							"id": "22",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -586,7 +606,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -599,7 +619,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "17",
+							"id": "14",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -609,7 +629,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "2",
+							"id": "3",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
@@ -619,7 +639,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "7",
+							"id": "21",
 							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
@@ -629,7 +649,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "12",
+							"id": "19",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -646,7 +666,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -659,7 +679,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "15",
+							"id": "12",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -669,7 +689,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "1",
+							"id": "2",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
@@ -679,7 +699,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "6",
+							"id": "17",
 							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
@@ -689,7 +709,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "11",
+							"id": "16",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -706,7 +726,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -719,7 +739,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "21",
+							"id": "20",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -729,7 +749,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "5",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
@@ -739,7 +759,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "9",
+							"id": "24",
 							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
@@ -749,7 +769,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "14",
+							"id": "25",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -766,7 +786,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10104",
@@ -779,7 +799,7 @@
 					"desc": "<p>Check for differences in response based on fuzzed User Agent (eg. mobile sites, access as a Search Engine Crawler). Compares the response statuscode and the hashcode of the response body with the original response.</p>",
 					"instances":[ 
 						{
-							"id": "54",
+							"id": "53",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -789,7 +809,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "51",
+							"id": "49",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -799,7 +819,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "48",
+							"id": "44",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -809,7 +829,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "59",
+							"id": "60",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -819,7 +839,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "60",
+							"id": "65",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -829,7 +849,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "93",
+							"id": "91",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -839,7 +859,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "88",
+							"id": "89",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -849,7 +869,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "65",
+							"id": "67",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -859,7 +879,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "72",
+							"id": "74",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -879,7 +899,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "81",
+							"id": "79",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -889,7 +909,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
+							"id": "71",
 							"uri": "http://backend:8081",
 							"nodeName": null,
 							"method": "GET",
@@ -899,22 +919,12 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "63",
+							"id": "51",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
 							"attack": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "57",
-							"uri": "http://backend:8081/",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
 							"evidence": "",
 							"otherinfo": ""
 						},
@@ -924,12 +934,22 @@
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
+							"attack": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "43",
+							"uri": "http://backend:8081/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
 							"attack": "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "68",
+							"id": "55",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
@@ -939,52 +959,12 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "75",
+							"id": "59",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
 							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "105",
-							"uri": "http://backend:8081/",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "103",
-							"uri": "http://backend:8081/",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "80",
-							"uri": "http://backend:8081/",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "90",
-							"uri": "http://backend:8081/",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)",
 							"evidence": "",
 							"otherinfo": ""
 						},
@@ -994,12 +974,52 @@
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "92",
+							"uri": "http://backend:8081/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "64",
+							"uri": "http://backend:8081/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "77",
+							"uri": "http://backend:8081/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "86",
+							"uri": "http://backend:8081/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
 							"attack": "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "96",
+							"id": "82",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
@@ -1009,7 +1029,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "85",
+							"id": "70",
 							"uri": "http://backend:8081/",
 							"nodeName": null,
 							"method": "GET",
@@ -1019,7 +1039,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "58",
+							"id": "54",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1029,7 +1049,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "53",
+							"id": "48",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1039,7 +1059,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "49",
+							"id": "45",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1049,7 +1069,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "61",
+							"id": "58",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1059,7 +1079,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "71",
+							"id": "61",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1069,7 +1089,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "101",
+							"id": "97",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1079,7 +1099,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "97",
+							"id": "93",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1089,7 +1109,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "73",
+							"id": "68",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1099,7 +1119,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "82",
+							"id": "78",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1109,7 +1129,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
+							"id": "88",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1119,7 +1139,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "86",
+							"id": "81",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1129,7 +1149,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
+							"id": "73",
 							"uri": "http://backend:8081/favicon.ico",
 							"nodeName": null,
 							"method": "GET",
@@ -1139,7 +1159,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "64",
+							"id": "56",
 							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
@@ -1149,7 +1169,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "56",
+							"id": "52",
 							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
@@ -1169,128 +1189,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "67",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "74",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "104",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "102",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "78",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "94",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "100",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "98",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "87",
-							"uri": "http://backend:8081/robots.txt",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "msnbot/1.1 (+http://search.msn.com/msnbot.htm)",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "55",
-							"uri": "http://backend:8081/sitemap.xml",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "52",
-							"uri": "http://backend:8081/sitemap.xml",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "50",
-							"uri": "http://backend:8081/sitemap.xml",
-							"nodeName": null,
-							"method": "GET",
-							"param": "Header User-Agent",
-							"attack": "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
 							"id": "62",
-							"uri": "http://backend:8081/sitemap.xml",
+							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
@@ -1300,7 +1200,7 @@
 						},
 						{
 							"id": "66",
-							"uri": "http://backend:8081/sitemap.xml",
+							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
@@ -1309,8 +1209,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "95",
-							"uri": "http://backend:8081/sitemap.xml",
+							"id": "101",
+							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
@@ -1319,12 +1219,102 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "91",
-							"uri": "http://backend:8081/sitemap.xml",
+							"id": "96",
+							"uri": "http://backend:8081/robots.txt",
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
 							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "72",
+							"uri": "http://backend:8081/robots.txt",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "80",
+							"uri": "http://backend:8081/robots.txt",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "95",
+							"uri": "http://backend:8081/robots.txt",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "87",
+							"uri": "http://backend:8081/robots.txt",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "75",
+							"uri": "http://backend:8081/robots.txt",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "msnbot/1.1 (+http://search.msn.com/msnbot.htm)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "57",
+							"uri": "http://backend:8081/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "50",
+							"uri": "http://backend:8081/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "42",
+							"uri": "http://backend:8081/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "63",
+							"uri": "http://backend:8081/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko",
 							"evidence": "",
 							"otherinfo": ""
 						},
@@ -1334,12 +1324,42 @@
 							"nodeName": null,
 							"method": "GET",
 							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "100",
+							"uri": "http://backend:8081/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "98",
+							"uri": "http://backend:8081/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
+							"attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "76",
+							"uri": "http://backend:8081/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Header User-Agent",
 							"attack": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "79",
+							"id": "85",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -1349,7 +1369,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "89",
+							"id": "94",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -1359,7 +1379,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "83",
+							"id": "90",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -1369,7 +1389,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "76",
+							"id": "83",
 							"uri": "http://backend:8081/sitemap.xml",
 							"nodeName": null,
 							"method": "GET",
@@ -1386,7 +1406,7 @@
 					"reference": "<p>https://owasp.org/wstg</p>",
 					"cweid": "0",
 					"wascid": "0",
-					"sourceid": "167"
+					"sourceid": "190"
 				}
 			]
 		}

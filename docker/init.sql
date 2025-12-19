@@ -1,3 +1,13 @@
+-- =====================================================
+-- 建立 SonarQube 資料庫
+-- =====================================================
+CREATE DATABASE sonarqube;
+GRANT ALL PRIVILEGES ON DATABASE sonarqube TO postgres;
+
+-- =====================================================
+-- 建立表格結構
+-- =====================================================
+
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
