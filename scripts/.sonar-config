@@ -1,0 +1,5 @@
+{
+  "sonar_url": "http://localhost:9000",
+  "project_key": "owasp-demo",
+  "token": "squ_5baa850112891b7bfbbe3bb2f89971385e3fc766"
+}

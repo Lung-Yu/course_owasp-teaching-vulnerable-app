@@ -15,7 +15,7 @@ if "%1"=="start" goto :start_sonarqube
 if "%1"=="stop" goto :stop_sonarqube
 if "%1"=="status" goto :check_status
 if "%1"=="logs" goto :show_logs
-if "%1"=="scan" goto :run_scan
+if "%1"=="scan" goto :run_scanœ
 if "%1"=="report" goto :generate_report
 
 goto :show_help
